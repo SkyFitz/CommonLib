@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2015 [1076559197@qq.com | tchen0707@gmail.com]
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License”);
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <style name="textStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/color_263238</item>
+    </style>
+
+    <style name="smallTextStyle" parent="textStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/color_39404b</item>
+    </style>
+
+    <style name="minTextStyle" parent="textStyle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/color_999999</item>
+    </style>
+
+    <style name="llstyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+    <style name="clStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="rowStyle" parent="clStyle">
+        <item name="android:background">@drawable/ripple_bg</item>
+    </style>
+
+    <style name="editstyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingLeft">3dp</item>
+        <item name="android:paddingRight">3dp</item>
+        <item name="android:textColor">@color/color_333333</item>
+        <item name="android:textColorHint">@color/alpha_10_black</item>
+        <item name="android:background">@color/transparent</item>
+    </style>
+
+    <style name="btnstyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="recycler_driver_parent">
+        <item name="isdivider">true</item>
+        <item name="divider_mrginleft">0dp</item>
+        <item name="divider_mrginright">0dp</item>
+    </style>
+
+    <style name="recycler_driver" parent="recycler_driver_parent">
+        <item name="divider_height">1dp</item>
+        <item name="divider_background">@color/color_dddddd</item>
+    </style>
+
+    <style name="recycler_driver_white" parent="recycler_driver_parent">
+        <item name="divider_height">15dp</item>
+        <item name="divider_background">@color/white</item>
+    </style>
+
+    <style name="recycler_driver_vertical_white" parent="recycler_driver_parent">
+        <item name="divider_height">15dp</item>
+        <item name="vertical">true</item>
+        <item name="divider_background">@color/white</item>
+    </style>
+
+    <style name="recycler_driver_gray" parent="recycler_driver_parent">
+        <item name="divider_height">0.5dp</item>
+        <item name="divider_background">@color/color_d9d9d9</item>
+    </style>
+
+    <style name="line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/color_f3f6fd</item>
+    </style>
+</resources>

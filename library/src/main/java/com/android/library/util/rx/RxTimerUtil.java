@@ -1,0 +1,144 @@
+package com.android.library.util.rx;
+
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+
+public class RxTimerUtil {
+    private static Disposable mDisposable;
+
+    /** milliseconds毫秒后执行next操作
+     *
+     * @param milliseconds
+     * @param next
+     */
+    public static void timer(long milliseconds,final IRxNext next) {
+        Observable.timer(milliseconds, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Long>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable disposable) {
+                        mDisposable=disposable;
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Long number) {
+                        if(next!=null){
+                            next.doNext(number);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        //取消订阅
+                        cancel();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        //取消订阅
+                        cancel();
+                    }
+                });
+    }
+
+
+    /** 每隔milliseconds毫秒后执行next操作
+     *
+     * @param milliseconds
+     * @param next
+     */
+    public static void interval(long milliseconds, final IRxNext next) {
+        Observable.interval(milliseconds, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Long>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable disposable) {
+                        mDisposable = disposable;
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Long number) {
+                        if (next != null) {
+                            next.doNext(number);
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    /**
+     * // 倒计时 单位秒
+     * @param count
+     * @param next
+     */
+    public static void countDown(final long count, final IRxNext next) {
+        Observable.interval(0, 1, TimeUnit.SECONDS)
+                .take(count + 1)
+                .map(new Function<Long, Long>() {
+                    @Override
+                    public Long apply(Long aLong) throws Exception {
+                        return count - aLong;
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Long>() {
+                        @Override
+                        public void onSubscribe(Disposable disposable) {
+                            mDisposable = disposable;
+                            if (next != null) {
+                                next.doStart();
+                            }
+                        }
+
+                        @Override
+                        public void onNext(Long num) {
+                            if (next != null) {
+                                next.doNext(num);
+                            }
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+
+                        @Override
+                        public void onComplete() {
+                            if (next != null) {
+                                next.doComplete();
+                            }
+                        }
+                    });
+    }
+
+    /**
+     * 取消订阅
+     */
+    public static void cancel() {
+        if (mDisposable != null && !mDisposable.isDisposed()) {
+            mDisposable.dispose();
+        }
+    }
+
+    public interface IRxNext{
+        void doNext(long number);
+        void doComplete();
+        void doStart();
+    }
+}

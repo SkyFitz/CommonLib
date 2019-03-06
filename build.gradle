@@ -1,0 +1,48 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: 'config.gradle'
+buildscript {
+    repositories {
+        // maven库
+        def cn = "http://maven.aliyun.com/nexus/content/groups/public/"
+        def abroad = "http://central.maven.org/maven2/"
+        // 先从url中下载jar若没有找到，则在artifactUrls中寻找
+        maven {
+            url cn
+            artifactUrls abroad
+        }
+        google()
+        maven { url "https://jitpack.io" }
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.3.1'
+        
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+subprojects {
+    project.configurations.all {
+        resolutionStrategy.eachDependency { details ->
+            if (details.requested.group == 'com.android.support'
+                    && !details.requested.name.contains('multidex') ) {
+                //统一版本号
+                details.useVersion "28.0.0"
+            }
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
